@@ -6,11 +6,12 @@ import 'package:tic_tac_toe_game/custom_dailog.dart';
 import 'package:tic_tac_toe_game/game_button.dart';
 
 class HomePage extends StatefulWidget {
-  String player1Name;
-  String? player2Name;
-  bool multiPlayer;
+  final String player1Name;
+  final String? player2Name;
+  final bool multiPlayer;
   HomePage(
-      {required this.player1Name,
+      {
+      required this.player1Name,
       required this.multiPlayer,
       this.player2Name,
       Key? key})
@@ -95,6 +96,62 @@ class _HomePageState extends State<HomePage> {
     var randIndex = r.nextInt(emptyCells.length - 1);
     var cellID = emptyCells[randIndex];
     int i = buttonsList.indexWhere((p) => p.id == cellID);
+    if (buttonsList[4].text == "") {
+      i = 4;
+    }
+    var winningList = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+      [1, 4, 7],
+      [2, 5, 8],
+      [3, 6, 9],
+      [1, 5, 9],
+      [3, 5, 7],
+    ];
+
+    winningList.forEach(
+      (element) {
+        if (player2.isNotEmpty) {
+          if (element.contains(player2.last)) {
+            if (player2.contains(element[0]) &&
+                player2.contains(element[1]) &&
+                buttonsList[element[2] - 1].text == "") {
+              i = element[2] - 1;
+            }
+            if (player2.contains(element[0]) &&
+                player2.contains(element[2]) &&
+                buttonsList[element[1] - 1].text == "") {
+              i = element[1] - 1;
+            }
+            if (player2.contains(element[1]) &&
+                player2.contains(element[2]) &&
+                buttonsList[element[0] - 1].text == "") {
+              i = element[0] - 1;
+            }
+          }
+        }
+
+        if (element.contains(player1.last)) {
+          if (player1.contains(element[0]) &&
+              player1.contains(element[1]) &&
+              buttonsList[element[2] - 1].text == "") {
+            i = element[2] - 1;
+          }
+          if (player1.contains(element[0]) &&
+              player1.contains(element[2]) &&
+              buttonsList[element[1] - 1].text == "") {
+            i = element[1] - 1;
+          }
+          if (player1.contains(element[1]) &&
+              player1.contains(element[2]) &&
+              buttonsList[element[0] - 1].text == "") {
+            i = element[0] - 1;
+          }
+        }
+      },
+    );
+
     playGame(buttonsList[i]);
   }
 
@@ -171,7 +228,7 @@ class _HomePageState extends State<HomePage> {
       } else {
         String? player2Name;
         if (widget.player2Name == null) {
-          player2Name = "AI";
+          player2Name = "Ultron (AI)";
         } else {
           player2Name = widget.player2Name;
         }
@@ -312,21 +369,24 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.refresh_rounded,
-                        size: 20,
-                      ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        "Double tap here to reset the game.",
-                        style: GoogleFonts.bebasNeue(fontSize: 15),
-                      )
-                    ],
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.refresh_rounded,
+                          size: 25,
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          "Double tap here to reset the game.",
+                          style: GoogleFonts.bebasNeue(fontSize: 20),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )
