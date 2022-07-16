@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tic_tac_toe_game/custom_dailog.dart';
@@ -10,8 +9,7 @@ class HomePage extends StatefulWidget {
   final String? player2Name;
   final bool multiPlayer;
   HomePage(
-      {
-      required this.player1Name,
+      {required this.player1Name,
       required this.multiPlayer,
       this.player2Name,
       Key? key})
@@ -95,11 +93,13 @@ class _HomePageState extends State<HomePage> {
     var r = Random();
     var randIndex = r.nextInt(emptyCells.length - 1);
     var cellID = emptyCells[randIndex];
+
     int i = buttonsList.indexWhere((p) => p.id == cellID);
+
     if (buttonsList[4].text == "") {
       i = 4;
     }
-    var winningList = [
+    List winningList = [
       [1, 2, 3],
       [4, 5, 6],
       [7, 8, 9],
@@ -112,6 +112,7 @@ class _HomePageState extends State<HomePage> {
 
     winningList.forEach(
       (element) {
+        //for winning
         if (player2.isNotEmpty) {
           if (element.contains(player2.last)) {
             if (player2.contains(element[0]) &&
@@ -131,7 +132,7 @@ class _HomePageState extends State<HomePage> {
             }
           }
         }
-
+        //for blocking
         if (element.contains(player1.last)) {
           if (player1.contains(element[0]) &&
               player1.contains(element[1]) &&
@@ -157,65 +158,146 @@ class _HomePageState extends State<HomePage> {
 
   int checkWinner() {
     var winner = -1;
+    //row 1
     if (player1.contains(1) && player1.contains(2) && player1.contains(3)) {
+      setState(() {
+        buttonsList[0].bg = Colors.grey.shade300;
+        buttonsList[1].bg = Colors.grey.shade300;
+        buttonsList[2].bg = Colors.grey.shade300;
+      });
       winner = 1;
     }
     if (player2.contains(1) && player2.contains(2) && player2.contains(3)) {
+      setState(() {
+        buttonsList[0].bg = Colors.grey.shade300;
+        buttonsList[1].bg = Colors.grey.shade300;
+        buttonsList[2].bg = Colors.grey.shade300;
+      });
       winner = 2;
     }
 
     // row 2
     if (player1.contains(4) && player1.contains(5) && player1.contains(6)) {
+      setState(() {
+        buttonsList[3].bg = Colors.grey.shade300;
+        buttonsList[4].bg = Colors.grey.shade300;
+        buttonsList[5].bg = Colors.grey.shade300;
+      });
       winner = 1;
     }
     if (player2.contains(4) && player2.contains(5) && player2.contains(6)) {
+      setState(() {
+        buttonsList[3].bg = Colors.grey.shade300;
+        buttonsList[4].bg = Colors.grey.shade300;
+        buttonsList[5].bg = Colors.grey.shade300;
+      });
       winner = 2;
     }
 
     // row 3
     if (player1.contains(7) && player1.contains(8) && player1.contains(9)) {
+      setState(() {
+        buttonsList[6].bg = Colors.grey.shade300;
+        buttonsList[7].bg = Colors.grey.shade300;
+        buttonsList[8].bg = Colors.grey.shade300;
+      });
       winner = 1;
     }
     if (player2.contains(7) && player2.contains(8) && player2.contains(9)) {
+      setState(() {
+        buttonsList[6].bg = Colors.grey.shade300;
+        buttonsList[7].bg = Colors.grey.shade300;
+        buttonsList[8].bg = Colors.grey.shade300;
+      });
       winner = 2;
     }
 
     // col 1
     if (player1.contains(1) && player1.contains(4) && player1.contains(7)) {
+      setState(() {
+        buttonsList[0].bg = Colors.grey.shade300;
+        buttonsList[3].bg = Colors.grey.shade300;
+        buttonsList[6].bg = Colors.grey.shade300;
+      });
       winner = 1;
     }
     if (player2.contains(1) && player2.contains(4) && player2.contains(7)) {
+      setState(() {
+        buttonsList[0].bg = Colors.grey.shade300;
+        buttonsList[3].bg = Colors.grey.shade300;
+        buttonsList[6].bg = Colors.grey.shade300;
+      });
       winner = 2;
     }
 
     // col 2
     if (player1.contains(2) && player1.contains(5) && player1.contains(8)) {
+      setState(() {
+        buttonsList[1].bg = Colors.grey.shade300;
+        buttonsList[4].bg = Colors.grey.shade300;
+        buttonsList[7].bg = Colors.grey.shade300;
+      });
       winner = 1;
     }
     if (player2.contains(2) && player2.contains(5) && player2.contains(8)) {
+      setState(() {
+        buttonsList[1].bg = Colors.grey.shade300;
+        buttonsList[4].bg = Colors.grey.shade300;
+        buttonsList[7].bg = Colors.grey.shade300;
+      });
       winner = 2;
     }
 
     // col 3
     if (player1.contains(3) && player1.contains(6) && player1.contains(9)) {
+      setState(() {
+        buttonsList[2].bg = Colors.grey.shade300;
+        buttonsList[5].bg = Colors.grey.shade300;
+        buttonsList[8].bg = Colors.grey.shade300;
+      });
       winner = 1;
     }
     if (player2.contains(3) && player2.contains(6) && player2.contains(9)) {
+      setState(() {
+        buttonsList[2].bg = Colors.grey.shade300;
+        buttonsList[5].bg = Colors.grey.shade300;
+        buttonsList[8].bg = Colors.grey.shade300;
+      });
       winner = 2;
     }
 
     //diagonal
     if (player1.contains(1) && player1.contains(5) && player1.contains(9)) {
+      setState(() {
+        buttonsList[0].bg = Colors.grey.shade300;
+        buttonsList[4].bg = Colors.grey.shade300;
+        buttonsList[8].bg = Colors.grey.shade300;
+      });
       winner = 1;
     }
     if (player2.contains(1) && player2.contains(5) && player2.contains(9)) {
+      setState(() {
+        buttonsList[0].bg = Colors.grey.shade300;
+        buttonsList[4].bg = Colors.grey.shade300;
+        buttonsList[8].bg = Colors.grey.shade300;
+      });
       winner = 2;
     }
 
     if (player1.contains(3) && player1.contains(5) && player1.contains(7)) {
+      setState(() {
+        buttonsList[2].bg = Colors.grey.shade300;
+        buttonsList[4].bg = Colors.grey.shade300;
+        buttonsList[6].bg = Colors.grey.shade300;
+      });
       winner = 1;
     }
     if (player2.contains(3) && player2.contains(5) && player2.contains(7)) {
+      setState(() {
+        buttonsList[2].bg = Colors.grey.shade300;
+        buttonsList[4].bg = Colors.grey.shade300;
+        buttonsList[6].bg = Colors.grey.shade300;
+      });
       winner = 2;
     }
 
@@ -262,17 +344,17 @@ class _HomePageState extends State<HomePage> {
               style: GoogleFonts.bebasNeue(),
             ),
             actions: [
-              ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(false),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
                 child: Text(
-                  'No',
+                  'Yes',
                   style: GoogleFonts.bebasNeue(),
                 ),
               ),
               ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(true),
+                onPressed: () => Navigator.of(context).pop(false),
                 child: Text(
-                  'Yes',
+                  'No',
                   style: GoogleFonts.bebasNeue(),
                 ),
               ),
@@ -291,6 +373,9 @@ class _HomePageState extends State<HomePage> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             foregroundColor: Colors.black,
+            centerTitle: true,
+            backgroundColor: Colors.white,
+            elevation: 0,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -308,9 +393,6 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-            centerTitle: true,
-            backgroundColor: Colors.white,
-            elevation: 0,
           ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -341,7 +423,7 @@ class _HomePageState extends State<HomePage> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Colors.white),
+                                  MaterialStateProperty.all(buttonsList[i].bg),
                               elevation: MaterialStateProperty.all(0)),
                           onPressed: buttonsList[i].enabled
                               ? () => playGame(buttonsList[i])
